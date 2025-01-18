@@ -28,7 +28,7 @@ from bot.helper.telegram_helper.message_utils import (
 )
 
 handler_dict = {}
-no_thumb = "https://graph.org/file/73ae908d18c6b38038071.jpg"
+no_thumb = "https://vault.pictures/p/5e8d8a0dc28347faaaff84f542b9957d"
 
 
 async def get_user_settings(from_user):
