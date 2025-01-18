@@ -167,17 +167,19 @@ def speed_string_to_bytes(size_text: str):
 
 
 def get_progress_bar_string(pct):
-    if isinstance(pct, str):
-        pct = float(pct.strip("%"))
+    pct = float(pct.strip('%'))
     p = min(max(pct, 0), 100)
-    c_full = int((p + 5) // 10)
-    p_str = "●" * c_full
-    p_str += "○" * (10 - c_full)
-    return p_str
+    cFull = int(p // 8)
+    cPart = int(p % 8 - 1)
+    p_str = '⬤' * cFull
+    if cPart >= 0:
+        p_str += ['○', '○', '◔', '◔', '◑', '◑', '◕', '◕'][cPart]
+    p_str += '○' * (12 - cFull)
+    return f"[{p_str}]"
 
 
 async def get_readable_message(sid, is_user, page_no=1, status="All", page_step=1):
-    msg = ""
+    msg = f'<a href="https://t.me/Modemirror"><b><i>Bot OF Mode Mirror</b></i></a>\n\n'
     button = None
 
     tasks = await sync_to_async(get_specific_tasks, status, sid if is_user else None)
